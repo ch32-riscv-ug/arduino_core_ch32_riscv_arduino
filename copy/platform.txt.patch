@@ -1,0 +1,11 @@
+--- platform.txt.org	2024-05-08 23:05:47.000000000 +0900
++++ platform.txt	2024-05-10 14:50:26.218670501 +0900
+@@ -4,7 +4,7 @@
+ # For more info at:
+ # https://arduino.github.io/arduino-cli/latest/platform-specification/
+ 
+-name=CH32 Risc-V noneOS
++name=CH32 Risc-V Arduino
+ version=1.0.0
+ 
+ # Compile variables
