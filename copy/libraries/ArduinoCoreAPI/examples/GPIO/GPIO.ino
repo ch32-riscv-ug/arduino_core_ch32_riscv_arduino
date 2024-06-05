@@ -2,22 +2,30 @@
 #define OUTPUT_PIN PC1
 #define INPUT_PIN PC2
 #else
-#define OUTPUT_PIN PA1
-#define INPUT_PIN PA2
+#define OUTPUT_PIN PA0
+#define INPUT_PIN PA1
 #endif
 
 void setup() {
-  printf("setup\n");
+  Serial.begin(115200);
+  Serial.println("setup");
   pinMode(OUTPUT_PIN, OUTPUT);
   pinMode(INPUT_PIN, INPUT_PULLUP);
 }
 
 void loop() {
+  char buff[80];
+
   static PinStatus output = LOW;
   output = (output == LOW) ? HIGH : LOW;
-  printf("loop\n");
+  Serial.println("loop");
   digitalWrite(OUTPUT_PIN, output);
-  printf(" output = %d\n", output);
-  printf(" input = %d\n", digitalRead(INPUT_PIN));
+
+  snprintf(buff, sizeof(buff), " output = %d", output);
+  Serial.println(buff);
+
+  snprintf(buff, sizeof(buff), " input = %d", digitalRead(INPUT_PIN));
+  Serial.println(buff);
+
   delay(1000);
 }

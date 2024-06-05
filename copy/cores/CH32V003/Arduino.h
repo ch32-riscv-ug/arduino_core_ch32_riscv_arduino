@@ -148,3 +148,5 @@ extern "C"
 // #define PG13 (CH32_GPIO_G | (13))
 // #define PG14 (CH32_GPIO_G | (14))
 // #define PG15 (CH32_GPIO_G | (15))
+
+#define CH32_UART1_TX PD5

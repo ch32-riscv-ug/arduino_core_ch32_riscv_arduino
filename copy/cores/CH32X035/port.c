@@ -5,6 +5,7 @@
  *  board_init
  *  Description: Initialize the board
  *   - The beginning of main() in /EVT/EXAM/GPIO/GPIO_Toggle/User/main.c
+ *  https://github.com/ch32-riscv-ug/CH32X035/blob/main/EVT/EXAM/GPIO/GPIO_Toggle/User/main.c#L56
  */
 void board_init()
 {
@@ -15,9 +16,10 @@ void board_init()
 }
 
 /*
- *  Delay_Init
- *  Description: Initialize the delay function
+ *  gpion_enable
+ *  Description: Initialize gpio
  *   - ClockCmd of GPIO_Toggle_INIT() in /EVT/EXAM/GPIO/GPIO_Toggle/User/main.c
+ *  https://github.com/ch32-riscv-ug/CH32X035/blob/main/EVT/EXAM/GPIO/GPIO_Toggle/User/main.c#L34
  */
 void gpion_enable(uint8_t gpion)
 {

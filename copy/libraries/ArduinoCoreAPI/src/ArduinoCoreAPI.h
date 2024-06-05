@@ -5,4 +5,6 @@
 #include "api/ArduinoAPI.h"
 #endif
 
+#include "Uart.h"
+
 #endif // __ArduinoCoreAPI_H

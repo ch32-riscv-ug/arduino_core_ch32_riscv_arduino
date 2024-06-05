@@ -12,3 +12,6 @@ int main(void)
         loop();
     }
 }
+
+void _fini() {}
+void _init() {}
