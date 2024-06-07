@@ -11,8 +11,12 @@ extern "C"
 
     void setup();
     void loop();
-    void board_init();
-    void gpion_enable(uint8_t gpion);
+    void ch32_board_init();
+    void ch32_gpion_enable(uint8_t gpion);
+
+    void SysTick_Handler(void) __attribute__((interrupt("WCH-Interrupt-fast")));
+    void ch32_systick_init_config(uint64_t ticks);
+    unsigned long ch32_micros(void);
 
 #ifdef __cplusplus
 }

@@ -6,14 +6,16 @@
 #define INPUT_PIN PA1
 #endif
 
-void setup() {
+void setup()
+{
   Serial.begin(115200);
   Serial.println("setup");
   pinMode(OUTPUT_PIN, OUTPUT);
   pinMode(INPUT_PIN, INPUT_PULLUP);
 }
 
-void loop() {
+void loop()
+{
   char buff[80];
 
   static PinStatus output = LOW;
@@ -25,6 +27,9 @@ void loop() {
   Serial.println(buff);
 
   snprintf(buff, sizeof(buff), " input = %d", digitalRead(INPUT_PIN));
+  Serial.println(buff);
+
+  snprintf(buff, sizeof(buff), " millis = %d, micros = %d", (unsigned int)millis(), (unsigned int)micros());
   Serial.println(buff);
 
   delay(1000);

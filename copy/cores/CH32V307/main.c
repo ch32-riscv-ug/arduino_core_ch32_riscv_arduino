@@ -3,7 +3,7 @@
 
 int main(void)
 {
-    board_init();
+    ch32_board_init();
 
     setup();
 

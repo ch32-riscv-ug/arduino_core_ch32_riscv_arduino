@@ -37,46 +37,46 @@ void pinMode(pin_size_t pinNumber, PinMode pinMode)
     // GPIO
     if ((pinNumber & CH32_GPIO_MASK) == CH32_GPIO_A)
     {
-        gpion_enable(CH32_GPIO_A);
+        ch32_gpion_enable(CH32_GPIO_A);
         GPIO_Init(GPIOA, &GPIO_InitStructure);
     }
 #if defined(CH32_GPIO_B)
     else if ((pinNumber & CH32_GPIO_MASK) == CH32_GPIO_B)
     {
-        gpion_enable(CH32_GPIO_B);
+        ch32_gpion_enable(CH32_GPIO_B);
         GPIO_Init(GPIOB, &GPIO_InitStructure);
     }
 #endif
     else if ((pinNumber & CH32_GPIO_MASK) == CH32_GPIO_C)
     {
-        gpion_enable(CH32_GPIO_C);
+        ch32_gpion_enable(CH32_GPIO_C);
         GPIO_Init(GPIOC, &GPIO_InitStructure);
     }
 #if defined(CH32_GPIO_D)
     else if ((pinNumber & CH32_GPIO_MASK) == CH32_GPIO_D)
     {
-        gpion_enable(CH32_GPIO_D);
+        ch32_gpion_enable(CH32_GPIO_D);
         GPIO_Init(GPIOD, &GPIO_InitStructure);
     }
 #endif
 #if defined(CH32_GPIO_E)
     else if ((pinNumber & CH32_GPIO_MASK) == CH32_GPIO_E)
     {
-        gpion_enable(CH32_GPIO_E);
+        ch32_gpion_enable(CH32_GPIO_E);
         GPIO_Init(GPIOE, &GPIO_InitStructure);
     }
 #endif
 #if defined(CH32_GPIO_F)
     else if ((pinNumber & CH32_GPIO_MASK) == CH32_GPIO_F)
     {
-        gpion_enable(CH32_GPIO_F);
+        ch32_gpion_enable(CH32_GPIO_F);
         GPIO_Init(GPIOF, &GPIO_InitStructure);
     }
 #endif
 #if defined(CH32_GPIO_G)
     else if ((pinNumber & CH32_GPIO_MASK) == CH32_GPIO_G)
     {
-        gpion_enable(CH32_GPIO_G);
+        ch32_gpion_enable(CH32_GPIO_G);
         GPIO_Init(GPIOG, &GPIO_InitStructure);
     }
 #endif
@@ -191,24 +191,49 @@ void analogWrite(pin_size_t pinNumber, int value)
     printf("pinNumber = %d, value = %d\n", pinNumber, value);
 }
 
+volatile unsigned int _millis;
+
 unsigned long millis(void)
 {
-    return 0;
+    return _millis;
 }
 
 unsigned long micros(void)
 {
-    return 0;
+    unsigned int micro = ch32_micros();
+
+    while ((micro % 1000) < 5)
+    {
+        micro = ch32_micros();
+    }
+
+    return micro;
 }
 
 void delay(unsigned long ms)
 {
-    Delay_Ms(ms);
+    unsigned long start = millis();
+    if (ms == 0)
+    {
+        return;
+    }
+    while (millis() < (start + ms))
+    {
+        // do nothing
+    }
 }
 
 void delayMicroseconds(unsigned int us)
 {
-    printf("us = %d\n", us);
+    unsigned long start = micros();
+    if (us == 0)
+    {
+        return;
+    }
+    while (micros() < (start + us))
+    {
+        // do nothing
+    }
 }
 
 unsigned long pulseIn(pin_size_t pin, uint8_t state, unsigned long timeout)

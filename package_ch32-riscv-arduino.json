@@ -12,6 +12,53 @@
                 {
                     "name": "CH32 RISC-V Arduino",
                     "architecture": "ch32riscv",
+                    "version": "1.2.0",
+                    "category": "Contributed",
+                    "url": "https://github.com/ch32-riscv-ug/arduino_core_ch32_riscv_arduino/releases/download/1.2.0/arduino_core_ch32_riscv_arduino.1.2.0.zip",
+                    "archiveFileName": "arduino_core_ch32_riscv_arduino.1.2.0.zip",
+                    "checksum": "SHA-256:d3607ddb10cf2ba00d314ca0827733392de5a157d74bf50b72b2d357fc34ea78",
+                    "size": 1224414,
+                    "boards": [
+                        {
+                            "name": "CH32L103 EVT Board"
+                        },
+                        {
+                            "name": "CH32X035 EVT Board"
+                        },
+                        {
+                            "name": "CH32V30x EVT Board"
+                        },
+                        {
+                            "name": "CH32V20x EVT Board"
+                        },
+                        {
+                            "name": "CH32V103 EVT Board"
+                        },
+                        {
+                            "name": "CH32V003 EVT Board"
+                        }
+                    ],
+                    "toolsDependencies": [
+                        {
+                            "packager": "ch32-riscv-arduino",
+                            "name": "riscv-none-embed-gcc-8",
+                            "version": "1.91"
+                        },
+                        {
+                            "packager": "ch32-riscv-arduino",
+                            "name": "openocd",
+                            "version": "1.91"
+                        },
+                        {
+                            "packager": "ch32-riscv-arduino",
+                            "name": "beforeinstall",
+                            "version": "1.91"
+                        }
+                    ]
+                },
+                {
+                    "name": "CH32 RISC-V Arduino",
+                    "architecture": "ch32riscv",
                     "version": "1.1.0",
                     "category": "Contributed",
                     "url": "https://github.com/ch32-riscv-ug/arduino_core_ch32_riscv_arduino/releases/download/1.1.0/arduino_core_ch32_riscv_arduino.1.1.0.zip",
@@ -41,7 +88,7 @@
                     "toolsDependencies": [
                         {
                             "packager": "ch32-riscv-arduino",
-                            "name": "riscv-none-embed-gcc",
+                            "name": "riscv-none-embed-gcc-8",
                             "version": "1.91"
                         },
                         {
@@ -59,7 +106,7 @@
             ],
             "tools": [
                 {
-                    "name": "riscv-none-embed-gcc",
+                    "name": "riscv-none-embed-gcc-8",
                     "version": "1.91",
                     "systems": [
                         {
@@ -89,6 +136,40 @@
                             "archiveFileName": "riscv-none-embed-gcc-8-mac-1.91.zip",
                             "checksum": "SHA-256:6372fa1b38a8b88d0702fdb5838d61c25debef42ba83a7e79185c336a7d929aa",
                             "size": "165225725"
+                        }
+                    ]
+                },
+                {
+                    "name": "riscv-none-elf-gcc-12",
+                    "version": "1.91",
+                    "systems": [
+                        {
+                            "host": "i686-mingw32",
+                            "url": "https://github.com/ch32-riscv-ug/MounRiver_Studio_Community_miror/releases/download/1.91-toolchain/riscv-none-elf-gcc-12-win-1.91.zip",
+                            "archiveFileName": "riscv-none-elf-gcc-12-win-1.91.zip",
+                            "checksum": "SHA-256:f3f5d5cd9b5985a10159e543f04e32dffa63c6282f45797d3b063656b49dfc02",
+                            "size": "380891911"
+                        },
+                        {
+                            "host": "x86_64-linux-gnu",
+                            "url": "https://github.com/ch32-riscv-ug/MounRiver_Studio_Community_miror/releases/download/1.91-toolchain/riscv-none-elf-gcc-12-linux-1.91.zip",
+                            "archiveFileName": "riscv-none-elf-gcc-12-linux-1.91.zip",
+                            "checksum": "SHA-256:3e2f579413a69318427421ec5a57dec060600417593bb8916bc40584e8e83c74",
+                            "size": "380329624"
+                        },
+                        {
+                            "host": "x86_64-apple-darwin",
+                            "url": "https://github.com/ch32-riscv-ug/MounRiver_Studio_Community_miror/releases/download/1.91-toolchain/riscv-none-elf-gcc-12-mac-1.91.zip",
+                            "archiveFileName": "riscv-none-elf-gcc-12-mac-1.91.zip",
+                            "checksum": "SHA-256:85e6db98c4b7134686e1211a1f8d52975baa021c301145b5b52d37fad9509a4b",
+                            "size": "353342911"
+                        },
+                        {
+                            "host": "arm64-apple-darwin",
+                            "url": "https://github.com/ch32-riscv-ug/MounRiver_Studio_Community_miror/releases/download/1.91-toolchain/riscv-none-elf-gcc-12-mac-1.91.zip",
+                            "archiveFileName": "riscv-none-elf-gcc-12-mac-1.91.zip",
+                            "checksum": "SHA-256:85e6db98c4b7134686e1211a1f8d52975baa021c301145b5b52d37fad9509a4b",
+                            "size": "353342911"
                         }
                     ]
                 },
