@@ -21,7 +21,7 @@ https://raw.githubusercontent.com/ch32-riscv-ug/arduino_core_ch32_riscv_arduino/
   - [ ] ADC
     - [ ] void analogReference(uint8_t mode)
     - [ ] int analogRead(pin_size_t pinNumber)
-  - [ ] ADC
+  - [ ] DAC
     - [ ] void analogWrite(pin_size_t pinNumber, int value)
   - [x] SysTick
     - [x] unsigned long micros(void)
