@@ -29,7 +29,7 @@ https://raw.githubusercontent.com/ch32-riscv-ug/arduino_core_ch32_riscv_arduino/
     - [x] void delay(unsigned long ms)
     - [x] void delayMicroseconds(unsigned int us)
 
-- [x] Serial(UartClass)
+- [x] USART/UART(Serial, UartClass)
 - [ ] I2C(Wire)
 - [ ] I2S
 - [ ] SPI
