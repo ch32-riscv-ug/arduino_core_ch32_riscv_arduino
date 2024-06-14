@@ -18,9 +18,9 @@ https://raw.githubusercontent.com/ch32-riscv-ug/arduino_core_ch32_riscv_arduino/
     - [ ] void shiftOut(pin_size_t dataPin, pin_size_t clockPin, BitOrder bitOrder, uint8_t val)
     - [ ] unsigned long pulseIn(pin_size_t pin, uint8_t state, unsigned long timeout)
     - [ ] unsigned long pulseInLong(pin_size_t pin, uint8_t state, unsigned long timeout)
-  - [ ] ADC
-    - [ ] void analogReference(uint8_t mode)
-    - [ ] int analogRead(pin_size_t pinNumber)
+  - [x] ADC
+    - [x] void analogReference(uint8_t mode)
+    - [x] int analogRead(pin_size_t pinNumber)
   - [ ] DAC
     - [ ] void analogWrite(pin_size_t pinNumber, int value)
   - [x] SysTick

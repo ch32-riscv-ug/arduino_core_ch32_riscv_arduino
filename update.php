@@ -1,12 +1,13 @@
 <?php
 
 chdir(dirname(__FILE__));
-system('rm -rfv arduino_core_ch32_riscv_arduino*');
-system('rm -rfv ArduinoCore-API-master');
+system('rm -rf arduino_core_ch32_riscv_arduino*');
+system('rm -rf ArduinoCore-API-master');
+system('rm -rf copy_core');
 
 $projects_name = 'arduino_core_ch32_riscv_arduino';
 $base_ver = '1.2';
-$ver = '1.2.0';
+$ver = '1.2.1';
 
 system("wget --continue https://github.com/ch32-riscv-ug/arduino_core_ch32_riscv_noneos/releases/download/$base_ver/arduino_core_ch32_riscv_noneos.$base_ver.zip");
 system("unzip arduino_core_ch32_riscv_noneos.$base_ver.zip");
@@ -16,15 +17,18 @@ system("mv arduino_core_ch32_riscv_noneos $projects_name");
 // update Arduono Core API
 system("wget https://codeload.github.com/arduino/ArduinoCore-API/zip/refs/heads/master -O ArduinoCore-API-master.zip");
 system("unzip ArduinoCore-API-master.zip");
-system('rm -rfv copy/libraries/ArduinoCoreAPI/src/api');
-system('cp -rfvp ArduinoCore-API-master/api copy/libraries/ArduinoCoreAPI/src/');
+system('mkdir -p copy_core/libraries/ArduinoCoreAPI/src');
+system('cp -rfvp ArduinoCore-API-master/api copy_core/libraries/ArduinoCoreAPI/src/');
 
 chdir($projects_name);
 
-system('find . -name "*.patch" | xargs rm');
-
 // copy copy
 $cmd = "cp -rfvp ../copy/* .";
+echo("exec $cmd\n");
+system($cmd);
+
+// copy copy_core
+$cmd = "cp -rfvp ../copy_core/* .";
 echo("exec $cmd\n");
 system($cmd);
 

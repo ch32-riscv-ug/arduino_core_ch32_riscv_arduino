@@ -12,6 +12,53 @@
                 {
                     "name": "CH32 RISC-V Arduino",
                     "architecture": "ch32riscv",
+                    "version": "1.2.1",
+                    "category": "Contributed",
+                    "url": "https://github.com/ch32-riscv-ug/arduino_core_ch32_riscv_arduino/releases/download/1.2.1/arduino_core_ch32_riscv_arduino.1.2.1.zip",
+                    "archiveFileName": "arduino_core_ch32_riscv_arduino.1.2.1.zip",
+                    "checksum": "SHA-256:983396d64d2475aa48e792f2deb3ce0ac30f55e4e6618981ccb4a0c9d03b31a5",
+                    "size": 1230083,
+                    "boards": [
+                        {
+                            "name": "CH32L103 EVT Board"
+                        },
+                        {
+                            "name": "CH32X035 EVT Board"
+                        },
+                        {
+                            "name": "CH32V30x EVT Board"
+                        },
+                        {
+                            "name": "CH32V20x EVT Board"
+                        },
+                        {
+                            "name": "CH32V103 EVT Board"
+                        },
+                        {
+                            "name": "CH32V003 EVT Board"
+                        }
+                    ],
+                    "toolsDependencies": [
+                        {
+                            "packager": "ch32-riscv-arduino",
+                            "name": "riscv-none-embed-gcc-8",
+                            "version": "1.91"
+                        },
+                        {
+                            "packager": "ch32-riscv-arduino",
+                            "name": "openocd",
+                            "version": "1.91"
+                        },
+                        {
+                            "packager": "ch32-riscv-arduino",
+                            "name": "beforeinstall",
+                            "version": "1.91"
+                        }
+                    ]
+                },
+                {
+                    "name": "CH32 RISC-V Arduino",
+                    "architecture": "ch32riscv",
                     "version": "1.2.0",
                     "category": "Contributed",
                     "url": "https://github.com/ch32-riscv-ug/arduino_core_ch32_riscv_arduino/releases/download/1.2.0/arduino_core_ch32_riscv_arduino.1.2.0.zip",

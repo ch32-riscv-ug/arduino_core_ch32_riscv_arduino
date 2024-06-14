@@ -14,6 +14,9 @@ extern "C"
     void ch32_board_init();
     void ch32_gpion_enable(uint8_t gpion);
 
+    uint8_t ch32_pin_to_adc(uint8_t pin);
+    void ch32_adc_init(uint8_t adc_unit);
+
     void SysTick_Handler(void) __attribute__((interrupt("WCH-Interrupt-fast")));
     void ch32_systick_init_config(uint64_t ticks);
     unsigned long ch32_micros(void);
@@ -175,3 +178,27 @@ extern "C"
 #define CH32_UART2_TX PA2
 #define CH32_UART3_TX PB3
 #define CH32_UART4_TX PB0
+
+#define CH32_ADC_SAMPLETIME ADC_SampleTime_11Cycles
+
+#define CH32_ADC1 (1 << 5)
+#define CH32_ADC2 (2 << 5)
+#define CH32_ADC_UNIT_MASK (0xe0)
+#define CH32_ADC_CH_MASK (0x1f)
+
+#define CH32_ADC1_0 (CH32_ADC1 | (0))
+#define CH32_ADC1_1 (CH32_ADC1 | (1))
+#define CH32_ADC1_2 (CH32_ADC1 | (2))
+#define CH32_ADC1_3 (CH32_ADC1 | (3))
+#define CH32_ADC1_4 (CH32_ADC1 | (4))
+#define CH32_ADC1_5 (CH32_ADC1 | (5))
+#define CH32_ADC1_6 (CH32_ADC1 | (6))
+#define CH32_ADC1_7 (CH32_ADC1 | (7))
+#define CH32_ADC1_8 (CH32_ADC1 | (8))
+#define CH32_ADC1_9 (CH32_ADC1 | (9))
+#define CH32_ADC1_10 (CH32_ADC1 | (10))
+#define CH32_ADC1_11 (CH32_ADC1 | (11))
+#define CH32_ADC1_12 (CH32_ADC1 | (12))
+#define CH32_ADC1_13 (CH32_ADC1 | (13))
+// #define CH32_ADC1_14 (CH32_ADC1 | (14))
+// #define CH32_ADC1_15 (CH32_ADC1 | (15))

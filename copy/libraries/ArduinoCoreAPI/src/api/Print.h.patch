@@ -1,0 +1,68 @@
+--- Print.h.org	2024-05-29 15:16:12.000000000 +0900
++++ Print.h	2024-06-12 17:57:15.387508536 +0900
+@@ -20,6 +20,7 @@
+ 
+ #include <inttypes.h>
+ #include <stdio.h> // for size_t
++#include <cstdarg>
+ 
+ #include "String.h"
+ #include "Printable.h"
+@@ -89,6 +90,57 @@ class Print
+     size_t println(const Printable&);
+     size_t println(void);
+ 
++    size_t vprintf(const char *format, va_list arg)
++    {
++      char buff[64];
++      char *temp = buff;
++      va_list copy;
++      va_copy(copy, arg);
++      int len = vsnprintf(temp, sizeof(buff), format, copy);
++      va_end(copy);
++      if (len < 0)
++      {
++        va_end(arg);
++        return 0;
++      }
++      if (len >= (int)sizeof(buff))
++      {
++        temp = (char *)malloc(len + 1);
++        if (temp == NULL)
++        {
++          va_end(arg);
++          return 0;
++        }
++        len = vsnprintf(temp, len + 1, format, arg);
++      }
++      va_end(arg);
++      len = write((uint8_t *)temp, len);
++      if (temp != buff)
++      {
++        free(temp);
++      }
++      return len;
++    }
++
++    size_t printf(const __FlashStringHelper *ifsh, ...)
++    {
++      va_list arg;
++      va_start(arg, ifsh);
++      const char *format = (reinterpret_cast<const char *>(ifsh));
++      size_t ret = vprintf(format, arg);
++      va_end(arg);
++      return ret;
++    }
++
++    size_t printf(const char *format, ...)
++    {
++      va_list arg;
++      va_start(arg, format);
++      size_t ret = vprintf(format, arg);
++      va_end(arg);
++      return ret;
++    }
++
+     virtual void flush() { /* Empty implementation for backward compatibility */ }
+ };
+ 

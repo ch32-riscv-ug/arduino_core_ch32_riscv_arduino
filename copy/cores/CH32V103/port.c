@@ -109,3 +109,92 @@ unsigned long ch32_micros(void)
     unsigned int micros = (millis() * 1000) + (cnt * 1000 / cmp);
     return micros;
 }
+
+/*
+ *  ch32_pin_to_adc
+ *  Description: Convert pin to ADC channel
+ *  https://ch32-riscv-ug.github.io/CH32V103/datasheet_en/CH32V103DS0.PDF
+ */
+uint8_t ch32_pin_to_adc(uint8_t pin)
+{
+    switch (pin)
+    {
+    case PA0:
+        return CH32_ADC1_0;
+    case PA1:
+        return CH32_ADC1_1;
+    case PA2:
+        return CH32_ADC1_2;
+    case PA3:
+        return CH32_ADC1_3;
+    case PA4:
+        return CH32_ADC1_4;
+    case PA5:
+        return CH32_ADC1_5;
+    case PA6:
+        return CH32_ADC1_6;
+    case PA7:
+        return CH32_ADC1_7;
+
+    case PB0:
+        return CH32_ADC1_8;
+    case PB1:
+        return CH32_ADC1_9;
+
+    case PC0:
+        return CH32_ADC1_10;
+    case PC1:
+        return CH32_ADC1_11;
+    case PC2:
+        return CH32_ADC1_12;
+    case PC3:
+        return CH32_ADC1_13;
+    case PC4:
+        return CH32_ADC1_14;
+    case PC5:
+        return CH32_ADC1_15;
+
+    default:
+        return 0;
+    }
+}
+
+/*
+ *  ch32_adc_init
+ *  Description: Initialize the ADC
+ *  https://github.com/ch32-riscv-ug/CH32V103/blob/main/EVT/EXAM/ADC/ADC_DMA/User/main.c#L34
+ *  ADC_InitStructure.ADC_ContinuousConvMode = DISABLE; // Enable to Disable
+ */
+void ch32_adc_init(uint8_t adc_unit)
+{
+    if (adc_unit != CH32_ADC1)
+    {
+        // only ADC1
+        return;
+    }
+
+    ADC_InitTypeDef ADC_InitStructure = {};
+
+    RCC_APB2PeriphClockCmd(RCC_APB2Periph_ADC1, ENABLE);
+    RCC_ADCCLKConfig(RCC_PCLK2_Div8);
+
+    ADC_DeInit(ADC1);
+    ADC_InitStructure.ADC_Mode = ADC_Mode_Independent;
+    ADC_InitStructure.ADC_ScanConvMode = DISABLE;
+    ADC_InitStructure.ADC_ContinuousConvMode = DISABLE; // Enable to Disable
+    ADC_InitStructure.ADC_ExternalTrigConv = ADC_ExternalTrigConv_None;
+    ADC_InitStructure.ADC_DataAlign = ADC_DataAlign_Right;
+    ADC_InitStructure.ADC_NbrOfChannel = 1;
+    ADC_Init(ADC1, &ADC_InitStructure);
+    ADC_Cmd(ADC1, ENABLE);
+
+    ADC_ResetCalibration(ADC1);
+    while (ADC_GetResetCalibrationStatus(ADC1))
+        ;
+    ADC_StartCalibration(ADC1);
+    while (ADC_GetCalibrationStatus(ADC1))
+        ;
+
+    extern int16_t ch32_adc1_calibrattion_val;
+    ch32_adc1_calibrattion_val = Get_CalibrationValue(ADC1);
+}

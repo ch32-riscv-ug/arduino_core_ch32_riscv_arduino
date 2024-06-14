@@ -1,6 +1,8 @@
 #include <Arduino.h>
 #include <debug.h>
 
+#define CH32_PIN_MODE_ANALOG ((PinMode)99)
+
 void pinMode(pin_size_t pinNumber, PinMode pinMode)
 {
     GPIO_InitTypeDef GPIO_InitStructure = {};
@@ -32,6 +34,10 @@ void pinMode(pin_size_t pinNumber, PinMode pinMode)
 #else
         GPIO_InitStructure.GPIO_Mode = GPIOMode_TypeDef(GPIO_Mode_IN_FLOATING | GPIO_Mode_Out_PP);
 #endif
+    }
+    else if (pinMode == CH32_PIN_MODE_ANALOG)
+    {
+        GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AIN;
     }
 
     // GPIO
@@ -175,15 +181,73 @@ PinStatus digitalRead(pin_size_t pinNumber)
     return ret;
 }
 
+uint32_t ch32_adc1_init_flag = 0;
+uint32_t ch32_adc2_init_flag = 0;
+int16_t ch32_adc1_calibrattion_val = 0;
+int16_t ch32_adc2_calibrattion_val = 0;
+
 int analogRead(pin_size_t pinNumber)
 {
-    printf("pinNumber = %d\n", pinNumber);
-    return 0;
+    uint8_t adc = ch32_pin_to_adc(pinNumber);
+    ADC_TypeDef *adc_unit;
+    uint8_t ch = adc & CH32_ADC_CH_MASK;
+    int16_t calibrattion_val;
+
+    if ((adc & CH32_ADC_UNIT_MASK) == CH32_ADC2)
+    {
+#if defined(ADC2)
+        adc_unit = ADC2;
+        if (ch32_adc2_init_flag == 0)
+        {
+            // init ADC2 Unit
+            ch32_adc_init(CH32_ADC2);
+        }
+        if ((ch32_adc2_init_flag & (1 << ch)) == 0)
+        {
+            // init pin
+            pinMode(pinNumber, CH32_PIN_MODE_ANALOG);
+        }
+#endif
+        calibrattion_val = ch32_adc2_calibrattion_val;
+    }
+    else
+    {
+        adc_unit = ADC1;
+        if (ch32_adc1_init_flag == 0)
+        {
+            // init ADC1 Unit
+            ch32_adc_init(CH32_ADC1);
+        }
+        if ((ch32_adc1_init_flag & (1 << ch)) == 0)
+        {
+            // init pin
+            pinMode(pinNumber, CH32_PIN_MODE_ANALOG);
+        }
+        calibrattion_val = ch32_adc1_calibrattion_val;
+    }
+
+    ADC_RegularChannelConfig(adc_unit, ch, 1, CH32_ADC_SAMPLETIME);
+    ADC_SoftwareStartConvCmd(adc_unit, ENABLE);
+
+    while (!ADC_GetFlagStatus(adc_unit, ADC_FLAG_EOC))
+        ;
+
+    int32_t val = ADC_GetConversionValue(adc_unit) + calibrattion_val;
+
+    if (val <= 0)
+    {
+        return 0;
+    }
+    if (4095 <= val)
+    {
+        return 4095;
+    }
+    return val;
 }
 
-void analogReference(uint8_t mode)
+void analogReference(uint8_t /*mode*/)
 {
-    printf("mode = %d\n", mode);
+    // do nothing
 }
 
 void analogWrite(pin_size_t pinNumber, int value)
