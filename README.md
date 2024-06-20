@@ -4,6 +4,15 @@ CH32 Risc-V for Arduino IDE
 ```
 https://raw.githubusercontent.com/ch32-riscv-ug/arduino_core_ch32_riscv_arduino/main/package_ch32-riscv-arduino.json
 ```
+
+## Overview
+
+This board manager is for building CH32's RISC-V series with Arduino IDE.
+
+- https://github.com/ch32-riscv-ug/arduino_core_ch32_riscv_noneos
+
+This is a board manager that runs EVT as is, with the addition of the Arduino Core API.
+
 ## Supported Features
 
 - [ ] Common
