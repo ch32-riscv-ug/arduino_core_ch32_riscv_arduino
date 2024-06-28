@@ -39,7 +39,8 @@ This is a board manager that runs EVT as is, with the addition of the Arduino Co
     - [x] void delayMicroseconds(unsigned int us)
 
 - [x] USART/UART(Serial, UartClass)
-- [ ] I2C(Wire)
+- [x] I2C(Wire Master)
+- [ ] I2C(Wire Slave)
 - [ ] I2S
 - [ ] SPI
 - [ ] Timer

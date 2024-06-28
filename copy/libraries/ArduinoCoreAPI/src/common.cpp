@@ -1,7 +1,8 @@
 #include <Arduino.h>
 #include <debug.h>
 
-#define CH32_PIN_MODE_ANALOG ((PinMode)99)
+#define CH32_PIN_MODE_ANALOG ((PinMode)100)
+#define CH32_PIN_MODE_AF_OD ((PinMode)101)
 
 void pinMode(pin_size_t pinNumber, PinMode pinMode)
 {
@@ -32,12 +33,20 @@ void pinMode(pin_size_t pinNumber, PinMode pinMode)
 #if defined(GPIO_Mode_Out_OD)
         GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_OD;
 #else
-        GPIO_InitStructure.GPIO_Mode = GPIOMode_TypeDef(GPIO_Mode_IN_FLOATING | GPIO_Mode_Out_PP);
+        GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
 #endif
     }
     else if (pinMode == CH32_PIN_MODE_ANALOG)
     {
         GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AIN;
+    }
+    else if (pinMode == CH32_PIN_MODE_AF_OD)
+    {
+#if defined(GPIO_Mode_AF_OD)
+        GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_OD;
+#else
+        GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;
+#endif
     }
 
     // GPIO

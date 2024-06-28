@@ -21,6 +21,8 @@ extern "C"
     void ch32_systick_init_config(uint64_t ticks);
     unsigned long ch32_micros(void);
 
+    void ch32_i2c_init(uint8_t i2c);
+
 #ifdef __cplusplus
 }
 #endif
@@ -174,10 +176,13 @@ extern "C"
 // #define PG14 (CH32_GPIO_G | (14))
 // #define PG15 (CH32_GPIO_G | (15))
 
+// https://ch32-riscv-ug.github.io/CH32X035/datasheet_en/CH32X035DS0.PDF#page=21
 #define CH32_UART1_TX PA10
 #define CH32_UART2_TX PA2
 #define CH32_UART3_TX PB3
 #define CH32_UART4_TX PB0
+#define CH32_I2C1_SCL PA10
+#define CH32_I2C1_SDA PA11
 
 #define CH32_ADC_SAMPLETIME ADC_SampleTime_11Cycles
 

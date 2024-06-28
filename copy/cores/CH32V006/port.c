@@ -5,7 +5,7 @@
  *  ch32_board_init
  *  Description: Initialize the board
  *   - The beginning of main() in /EVT/EXAM/GPIO/GPIO_Toggle/User/main.c
- *  https://github.com/ch32-riscv-ug/CH32L103/blob/main/EVT/EXAM/GPIO/GPIO_Toggle/User/main.c#L55
+ *  https://github.com/ch32-riscv-ug/CH32V006/blob/main/EVT/EXAM/GPIO/GPIO_Toggle/User/main.c#L50
  */
 void ch32_board_init()
 {
@@ -19,7 +19,7 @@ void ch32_board_init()
  *  ch32_gpion_enable
  *  Description: Initialize gpio
  *   - ClockCmd of GPIO_Toggle_INIT() in /EVT/EXAM/GPIO/GPIO_Toggle/User/main.c
- *  https://github.com/ch32-riscv-ug/CH32L103/blob/main/EVT/EXAM/GPIO/GPIO_Toggle/User/main.c#L33
+ *  https://github.com/ch32-riscv-ug/CH32V006/blob/main/EVT/EXAM/GPIO/GPIO_Toggle/User/main.c#L32
  */
 void ch32_gpion_enable(uint8_t gpion)
 {
@@ -47,7 +47,7 @@ extern volatile unsigned long _millis;
  *  SysTick_Handler
  *  Description: SysTick interrupt handler
  *   - SysTick_Handler in /EVT/EXAM/SYSTICK/SYSTICK_Interrupt/User/main.c
- *  https://github.com/ch32-riscv-ug/CH32L103/blob/main/EVT/EXAM/SYSTICK/SYSTICK_Interrupt/User/main.c#L59
+ *  https://github.com/ch32-riscv-ug/CH32V006/blob/main/EVT/EXAM/SYSTICK/SYSTICK_Interrupt/User/main.c#L61
  */
 void SysTick_Handler(void)
 {
@@ -59,17 +59,15 @@ void SysTick_Handler(void)
  *  ch32_systick_init_config
  *  Description: Initialize SysTick
  *  - SysTick_Config of SYSTICK_Init_Config() in /EVT/EXAM/SYSTICK/SYSTICK_Interrupt/User/main.c
- *  https://github.com/ch32-riscv-ug/CH32L103/blob/main/EVT/EXAM/SYSTICK/SYSTICK_Interrupt/User/main.c#L41
+ *  https://github.com/ch32-riscv-ug/CH32V006/blob/main/EVT/EXAM/SYSTICK/SYSTICK_Interrupt/User/main.c#L43
  */
 void ch32_systick_init_config(uint64_t ticks)
 {
-    SysTick->SR = 0;
-    SysTick->CNT = 0;
-    SysTick->CMP = ticks;
-    SysTick->CTLR = 0xF;
-
-    NVIC_SetPriority(SysTicK_IRQn, 15);
     NVIC_EnableIRQ(SysTicK_IRQn);
+    SysTick->SR &= ~(1 << 0);
+    SysTick->CMP = (uint32_t)ticks;
+    SysTick->CNT = 0;
+    SysTick->CTLR = 0xF;
 }
 
 unsigned long millis(void); // common.cpp
@@ -89,33 +87,28 @@ unsigned long ch32_micros(void)
 /*
  *  ch32_pin_to_adc
  *  Description: Convert pin to ADC channel
- *  https://ch32-riscv-ug.github.io/CH32L103/datasheet_en/CH32L103DS0.PDF#page=29
+ *  https://ch32-riscv-ug.github.io/CH32V006/datasheet_en/CH32V006DS0.PDF#page=27
  */
 uint8_t ch32_pin_to_adc(uint8_t pin)
 {
     switch (pin)
     {
-    case PA0:
+    case PA2:
         return CH32_ADC1_0;
     case PA1:
         return CH32_ADC1_1;
-    case PA2:
+    case PC4:
         return CH32_ADC1_2;
-    case PA3:
+    case PD2:
         return CH32_ADC1_3;
-    case PA4:
+    case PD3:
         return CH32_ADC1_4;
-    case PA5:
+    case PD5:
         return CH32_ADC1_5;
-    case PA6:
+    case PD6:
         return CH32_ADC1_6;
-    case PA7:
+    case PD4:
         return CH32_ADC1_7;
-
-    case PB0:
-        return CH32_ADC1_8;
-    case PB1:
-        return CH32_ADC1_9;
 
     default:
         return 0;
@@ -125,7 +118,7 @@ uint8_t ch32_pin_to_adc(uint8_t pin)
 /*
  *  ch32_adc_init
  *  Description: Initialize the ADC
- *  https://github.com/ch32-riscv-ug/CH32L103/blob/main/EVT/EXAM/ADC/ADC_DMA/User/main.c#L34
+ *  https://github.com/ch32-riscv-ug/CH32V006/blob/main/EVT/EXAM/ADC/ADC_DMA/User/main.c#L33
  *  ADC_InitStructure.ADC_ContinuousConvMode = DISABLE; // Enable to Disable
  */
 void ch32_adc_init(uint8_t adc_unit)
@@ -142,10 +135,6 @@ void ch32_adc_init(uint8_t adc_unit)
     RCC_ADCCLKConfig(RCC_PCLK2_Div8);
 
     ADC_DeInit(ADC1);
-
-    extern int16_t ch32_adc1_calibrattion_val;
-    ch32_adc1_calibrattion_val = Get_CalibrationValue(ADC1);
-
     ADC_InitStructure.ADC_Mode = ADC_Mode_Independent;
     ADC_InitStructure.ADC_ScanConvMode = DISABLE;
     ADC_InitStructure.ADC_ContinuousConvMode = DISABLE; // Enable to Disable
@@ -161,12 +150,15 @@ void ch32_adc_init(uint8_t adc_unit)
     ADC_StartCalibration(ADC1);
     while (ADC_GetCalibrationStatus(ADC1))
         ;
+
+    extern int16_t ch32_adc1_calibrattion_val;
+    ch32_adc1_calibrattion_val = 0;
 }
 
 /*
  *  ch32_i2c_init
  *  Description: Initialize the I2C
- *  https://github.com/ch32-riscv-ug/CH32L103/blob/main/EVT/EXAM/I2C/I2C_7bit_Mode/User/main.c#L58
+ *  https://github.com/ch32-riscv-ug/CH32V006/blob/main/EVT/EXAM/I2C/I2C_7bit_Mode/User/main.c#L58
  */
 void ch32_i2c_init(uint8_t i2c)
 {

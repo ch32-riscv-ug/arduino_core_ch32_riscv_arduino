@@ -89,7 +89,7 @@ unsigned long ch32_micros(void)
 /*
  *  ch32_pin_to_adc
  *  Description: Convert pin to ADC channel
- *  https://ch32-riscv-ug.github.io/CH32X035/datasheet_en/CH32X035DS0.PDF
+ *  https://ch32-riscv-ug.github.io/CH32X035/datasheet_en/CH32X035DS0.PDF#page=21
  */
 uint8_t ch32_pin_to_adc(uint8_t pin)
 {
@@ -162,4 +162,23 @@ void ch32_adc_init(uint8_t adc_unit)
 
     extern int16_t ch32_adc1_calibrattion_val;
     ch32_adc1_calibrattion_val = 0;
+}
+
+/*
+ *  ch32_i2c_init
+ *  Description: Initialize the I2C
+ *  https://github.com/ch32-riscv-ug/CH32X035/blob/main/EVT/EXAM/I2C/I2C_7bit_Mode/User/main.c#L58
+ */
+void ch32_i2c_init(uint8_t i2c)
+{
+    if (i2c == 1)
+    {
+        RCC_APB1PeriphClockCmd(RCC_APB1Periph_I2C1, ENABLE);
+    }
+#if defined(I2C2)
+    else if (i2c == 2)
+    {
+        RCC_APB1PeriphClockCmd(RCC_APB1Periph_I2C2, ENABLE);
+    }
+#endif
 }

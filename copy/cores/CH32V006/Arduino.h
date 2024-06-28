@@ -37,7 +37,7 @@ extern "C"
 #define CH32_GPIO_MASK (0xe0)
 #define CH32_PIN_MASK (0x1f)
 
-#define CH32_GPIO_SPEED GPIO_Speed_50MHz
+#define CH32_GPIO_SPEED GPIO_Speed_30MHz
 
 #define PA0 (CH32_GPIO_A | (0))
 #define PA1 (CH32_GPIO_A | (1))
@@ -47,14 +47,14 @@ extern "C"
 #define PA5 (CH32_GPIO_A | (5))
 #define PA6 (CH32_GPIO_A | (6))
 #define PA7 (CH32_GPIO_A | (7))
-#define PA8 (CH32_GPIO_A | (8))
-#define PA9 (CH32_GPIO_A | (9))
-#define PA10 (CH32_GPIO_A | (10))
-#define PA11 (CH32_GPIO_A | (11))
-#define PA12 (CH32_GPIO_A | (12))
-#define PA13 (CH32_GPIO_A | (13))
-#define PA14 (CH32_GPIO_A | (14))
-#define PA15 (CH32_GPIO_A | (15))
+// #define PA8 (CH32_GPIO_A | (8))
+// #define PA9 (CH32_GPIO_A | (9))
+// #define PA10 (CH32_GPIO_A | (10))
+// #define PA11 (CH32_GPIO_A | (11))
+// #define PA12 (CH32_GPIO_A | (12))
+// #define PA13 (CH32_GPIO_A | (13))
+// #define PA14 (CH32_GPIO_A | (14))
+// #define PA15 (CH32_GPIO_A | (15))
 
 #define PB0 (CH32_GPIO_B | (0))
 #define PB1 (CH32_GPIO_B | (1))
@@ -63,15 +63,15 @@ extern "C"
 #define PB4 (CH32_GPIO_B | (4))
 #define PB5 (CH32_GPIO_B | (5))
 #define PB6 (CH32_GPIO_B | (6))
-#define PB7 (CH32_GPIO_B | (7))
-#define PB8 (CH32_GPIO_B | (8))
-#define PB9 (CH32_GPIO_B | (9))
-#define PB10 (CH32_GPIO_B | (10))
-#define PB11 (CH32_GPIO_B | (11))
-#define PB12 (CH32_GPIO_B | (12))
-#define PB13 (CH32_GPIO_B | (13))
-#define PB14 (CH32_GPIO_B | (14))
-#define PB15 (CH32_GPIO_B | (15))
+// #define PB7 (CH32_GPIO_B | (7))
+// #define PB8 (CH32_GPIO_B | (8))
+// #define PB9 (CH32_GPIO_B | (9))
+// #define PB10 (CH32_GPIO_B | (10))
+// #define PB11 (CH32_GPIO_B | (11))
+// #define PB12 (CH32_GPIO_B | (12))
+// #define PB13 (CH32_GPIO_B | (13))
+// #define PB14 (CH32_GPIO_B | (14))
+// #define PB15 (CH32_GPIO_B | (15))
 
 #define PC0 (CH32_GPIO_C | (0))
 #define PC1 (CH32_GPIO_C | (1))
@@ -81,23 +81,23 @@ extern "C"
 #define PC5 (CH32_GPIO_C | (5))
 #define PC6 (CH32_GPIO_C | (6))
 #define PC7 (CH32_GPIO_C | (7))
-#define PC8 (CH32_GPIO_C | (8))
-#define PC9 (CH32_GPIO_C | (9))
-#define PC10 (CH32_GPIO_C | (10))
-#define PC11 (CH32_GPIO_C | (11))
-#define PC12 (CH32_GPIO_C | (12))
-#define PC13 (CH32_GPIO_C | (13))
-#define PC14 (CH32_GPIO_C | (14))
-#define PC15 (CH32_GPIO_C | (15))
+// #define PC8 (CH32_GPIO_C | (8))
+// #define PC9 (CH32_GPIO_C | (9))
+// #define PC10 (CH32_GPIO_C | (10))
+// #define PC11 (CH32_GPIO_C | (11))
+// #define PC12 (CH32_GPIO_C | (12))
+// #define PC13 (CH32_GPIO_C | (13))
+// #define PC14 (CH32_GPIO_C | (14))
+// #define PC15 (CH32_GPIO_C | (15))
 
 #define PD0 (CH32_GPIO_D | (0))
 #define PD1 (CH32_GPIO_D | (1))
 #define PD2 (CH32_GPIO_D | (2))
-// #define PD3 (CH32_GPIO_D | (3))
-// #define PD4 (CH32_GPIO_D | (4))
-// #define PD5 (CH32_GPIO_D | (5))
-// #define PD6 (CH32_GPIO_D | (6))
-// #define PD7 (CH32_GPIO_D | (7))
+#define PD3 (CH32_GPIO_D | (3))
+#define PD4 (CH32_GPIO_D | (4))
+#define PD5 (CH32_GPIO_D | (5))
+#define PD6 (CH32_GPIO_D | (6))
+#define PD7 (CH32_GPIO_D | (7))
 // #define PD8 (CH32_GPIO_D | (8))
 // #define PD9 (CH32_GPIO_D | (9))
 // #define PD10 (CH32_GPIO_D | (10))
@@ -158,17 +158,13 @@ extern "C"
 // #define PG14 (CH32_GPIO_G | (14))
 // #define PG15 (CH32_GPIO_G | (15))
 
-// https://ch32-riscv-ug.github.io/CH32V20x/datasheet_en/CH32V208DS0.PDF#page=24
-#define CH32_UART1_TX PA9
-#define CH32_UART2_TX PA2
-#define CH32_UART3_TX PB10
-#define CH32_UART4_TX PB0
-#define CH32_I2C1_SCL PB6
-#define CH32_I2C1_SDA PB7
-#define CH32_I2C2_SCL PB10
-#define CH32_I2C2_SDA PB11
+// https://ch32-riscv-ug.github.io/CH32V006/datasheet_en/CH32V006DS0.PDF#page=27
+#define CH32_UART1_TX PD5
 
-#define CH32_ADC_SAMPLETIME ADC_SampleTime_239Cycles5
+#define CH32_I2C1_SCL PC2
+#define CH32_I2C1_SDA PC1
+
+#define CH32_ADC_SAMPLETIME ADC_SampleTime_CyclesMode7
 
 #define CH32_ADC1 (1 << 5)
 #define CH32_ADC2 (2 << 5)
@@ -183,11 +179,3 @@ extern "C"
 #define CH32_ADC1_5 (CH32_ADC1 | (5))
 #define CH32_ADC1_6 (CH32_ADC1 | (6))
 #define CH32_ADC1_7 (CH32_ADC1 | (7))
-#define CH32_ADC1_8 (CH32_ADC1 | (8))
-#define CH32_ADC1_9 (CH32_ADC1 | (9))
-#define CH32_ADC1_10 (CH32_ADC1 | (10))
-#define CH32_ADC1_11 (CH32_ADC1 | (11))
-#define CH32_ADC1_12 (CH32_ADC1 | (12))
-#define CH32_ADC1_13 (CH32_ADC1 | (13))
-#define CH32_ADC1_14 (CH32_ADC1 | (14))
-#define CH32_ADC1_15 (CH32_ADC1 | (15))
