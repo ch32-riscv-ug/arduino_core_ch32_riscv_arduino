@@ -23,6 +23,8 @@ extern "C"
 
     void ch32_i2c_init(uint8_t i2c);
 
+    void sysTickUpdate();
+
 #ifdef __cplusplus
 }
 #endif

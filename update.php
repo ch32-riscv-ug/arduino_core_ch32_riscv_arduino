@@ -7,7 +7,7 @@ system('rm -rf copy_core');
 
 $projects_name = 'arduino_core_ch32_riscv_arduino';
 $base_ver = '1.4';
-$ver = '1.4.0';
+$ver = '1.4.1';
 
 system("wget --continue https://github.com/ch32-riscv-ug/arduino_core_ch32_riscv_noneos/releases/download/$base_ver/arduino_core_ch32_riscv_noneos.$base_ver.zip");
 system("unzip arduino_core_ch32_riscv_noneos.$base_ver.zip");

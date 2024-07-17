@@ -57,6 +57,7 @@ void SysTick_Handler(void)
 {
     SysTick->SR = 0;
     _millis++;
+    sysTickUpdate();
 }
 
 /*

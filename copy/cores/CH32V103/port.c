@@ -60,6 +60,7 @@ void SysTick_Handler(void)
     SysTick->CNTH2 = 0;
     SysTick->CNTH3 = 0;
     _millis++;
+    sysTickUpdate();
 }
 
 /*

@@ -346,3 +346,8 @@ void detachInterrupt(pin_size_t interruptNumber)
 {
     printf("interruptNumber = %d\n", interruptNumber);
 }
+
+void sysTickUpdate()
+{
+    Timer.update();
+}

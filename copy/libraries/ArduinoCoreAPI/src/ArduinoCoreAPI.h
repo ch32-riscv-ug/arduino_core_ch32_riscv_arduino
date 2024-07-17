@@ -6,5 +6,6 @@
 #endif
 
 #include "Uart.h"
+#include "Timer.h"
 
 #endif // __ArduinoCoreAPI_H
